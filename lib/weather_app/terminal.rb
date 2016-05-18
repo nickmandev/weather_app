@@ -1,8 +1,13 @@
-require 'json'
 module WeatherApp
   class Terminal
 
-    attr_accessor :city
+    attr_accessor :city, :city_id
+
+    def start
+      request_user_input
+      define_city_id
+      user_output
+    end
 
     def request_user_input
       puts "Enter the name of the city starting with capital letter"
@@ -20,7 +25,8 @@ module WeatherApp
     end
 
     def user_output
-      data = get_data
+      common = Common.new
+      data = common.get_data(@city_id)
       print "The weather in #{data[:name]} is #{data[:weather][0][:description]} and the temperature is #{data[:main][:temp]} C"
     end
 
