@@ -1,26 +1,33 @@
 module WeatherApp
   class Terminal
 
-    attr_accessor :city, :city_id
+    attr_accessor :city, :search_results
 
     def start
       request_user_input
       define_city_id
-      user_output
     end
 
     def request_user_input
-      puts "Enter the name of the city starting with capital letter"
+      puts "Enter the name of the city:"
       @city = STDIN.gets.chomp
     end
 
     def define_city_id
+      @search_results = []
       file = File.read('/Users/nick/Developer/Projects/weather_app/assets/city.list.json')
       parsed_json = JSON.parse(file, symbolize_names: true)
       parsed_json.each do |val|
         if val[:name] == @city
-          @city_id = val[:_id]
+          @search_results << val
         end
+      end
+      @search_results.each do |data|
+        puts  "The results are:\n\n"
+        puts  " City: #{data[:name]}"
+        puts  " Country: #{data[:country]}"
+        puts  " Longitude: #{data[:coord][:lon]}"
+        puts  " Latitude: #{data[:coord][:lat]}\n\n"
       end
     end
 
