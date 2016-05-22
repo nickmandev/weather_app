@@ -8,4 +8,4 @@
 /spec/reports/
 /tmp/
 /.idea
-/config/configatron
+/config/weather_app.yml

@@ -5,4 +5,3 @@ gemspec
 
 gem 'json'
 
-gem 'configatron'

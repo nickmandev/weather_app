@@ -1,2 +1,2 @@
 # "http://openweathermap.org/" from here you can get your api key
-configatron.api_key = "<ENTER_YOUR_API_KEY_FOR_OPEN_WEATHER_HERE>"
+#api_key: "ENTER_YOUR_API_KEY_FOR_OPEN_WEATHER_HERE"

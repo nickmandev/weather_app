@@ -17,10 +17,9 @@ module WeatherApp
     end
 
     def define_city_id
+      common = Common.new
       @search_results = []
-      file = File.read('/Users/nick/Developer/Projects/weather_app/assets/city.list.json')
-      parsed_json = JSON.parse(file, symbolize_names: true)
-      parsed_json.each do |val|
+      common.get_city_list.each do |val|
         if val[:name] == @city
           @search_results << val
         end
