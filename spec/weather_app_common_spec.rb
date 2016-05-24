@@ -1,22 +1,29 @@
 require 'spec_helper'
 
-describe WeatherApp::Terminal do
-  attr_accessor :terminal, :city
-  before :each do
-    @terminal = WeatherApp::Terminal.new
-  end
-
-  describe "#new" do
-    it 'returns Terminal object' do
-      expect(@terminal).to be_a WeatherApp::Terminal
+describe WeatherApp::Common do
+  describe  "#new" do
+    attr_accessor :common
+    let(:common) {WeatherApp::Common.new}
+    it 'return Common object' do
+      expect(common).to be_a WeatherApp::Common
     end
   end
 
-  describe "#capitalize_user_input" do
-    it 'should capitalize the user input' do
-      @terminal.city = 'santa sofia'
-      expect(@terminal.capitalize_user_input) == 'Santa Sofia'
+  describe "#get_data" do
+    let(:common) {WeatherApp::Common.new}
+    it 'expect to get data from URL and parse JSON' do
+      common.get_data(727011)
+      _expected = {key: 'details'}.to_json
+        expect(common.get_data(727011)) == _expected
     end
   end
 
+  describe "#get_city_list" do
+    let(:common) {WeatherApp::Common.new}
+    it 'expect to parse JSON' do
+      common.get_city_list
+      _expected = {key: 'value'}.to_json
+        expect(common.get_city_list) == _expected
+    end
+  end
 end

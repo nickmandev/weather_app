@@ -7,7 +7,7 @@ module WeatherApp
       @common = Common.new
       request_user_input
       capitalize_user_input
-      get_city_id
+      find_city_id
       process_search_results
     end
 
@@ -20,7 +20,7 @@ module WeatherApp
       @city = @city.split.map(&:capitalize).join(" ")
     end
 
-    def get_city_id
+    def find_city_id
       @search_results = []
       @common.get_city_list.each do |val|
         if val[:name] == @city
