@@ -18,17 +18,18 @@ module WeatherApp
 
     def capitalize_user_input
       @city = @city.split.map(&:capitalize).join(" ")
+      raise 'You must enter a name' if @city.length == 0
     end
 
     def find_city_id
       @search_results = []
-      @common.get_city_list.each do |val|
-        if val[:name] == @city
-          @search_results << val
-        end
-      end
+       @common.get_city_list.each do |val|
+         if val[:name] == @city
+           @search_results << val
+         end
+       end
+      raise ArgumentError,'Nothing was found.Check for typos!' if @search_results.length == 0
     end
-
     def process_search_results
       if @search_results.length == 1
         single_result
