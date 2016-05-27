@@ -5,6 +5,7 @@ module WeatherApp
       api_key = WEATHER_APP_CONFIG['api_key']
       url = "http://api.openweathermap.org/data/2.5/weather?id=#{city_id}&units=#{units}&APPID=#{api_key}"
       api_response = Net::HTTP.get(URI.parse(url))
+      raise "There's something wrong with the server! Try again later." unless Timeout::Error
       JSON.parse(api_response, symbolize_names: true)
     end
 

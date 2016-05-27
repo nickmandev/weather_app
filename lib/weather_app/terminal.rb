@@ -18,7 +18,10 @@ module WeatherApp
 
     def capitalize_user_input
       @city = @city.split.map(&:capitalize).join(" ")
-      raise 'You must enter a name' if @city.length == 0
+      raise ArgumentError if @city.length == 0
+    rescue
+      puts "Can't leave the field blank!"
+      start
     end
 
     def find_city_id
@@ -28,7 +31,10 @@ module WeatherApp
            @search_results << val
          end
        end
-      raise ArgumentError,'Nothing was found.Check for typos!' if @search_results.length == 0
+      raise ArgumentError if @search_results.length == 0
+    rescue
+      puts "Can't find a city with that name.Check for typos!"
+      start
     end
     def process_search_results
       if @search_results.length == 1
@@ -58,6 +64,7 @@ module WeatherApp
     def user_output
       data = @common.get_data(@city_id)
       puts "The weather in #{data[:name]} is #{data[:weather][0][:description]} and the temperature is #{data[:main][:temp]} C"
+      exit
     end
   end
 end
