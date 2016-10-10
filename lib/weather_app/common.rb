@@ -14,5 +14,15 @@ module WeatherApp
       file = File.read(path_to_file)
       JSON.parse(file, symbolize_names: true)
     end
+
+    def five_day_forecast(city_id)
+      units = WEATHER_APP_CONFIG['units']
+      api_key = WEATHER_APP_CONFIG['api_key']
+      url = "api.openweathermap.org/data/2.5/forecast?id=#{city_id}&units=#{units}&APPID=#{api_key}"
+      api_response = Net::HTTP.get(URI.parse(url))
+      raise "There's something wrong with the server! Try again later." unless Timeout::Error
+      JSON.parse(api_response, symbolize_names: true)
+    end
+      
   end
 end
