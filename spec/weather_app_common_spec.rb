@@ -25,13 +25,6 @@ describe WeatherApp::Common do
     end
   end
 
-  describe "#get_data" do
-    let(:common) {WeatherApp::Common.new}
-    it 'expect to fail without city_id' do
-      common.get_data(value)
-    end
-  end
-
   describe "#get_city_list" do
     let(:common) {WeatherApp::Common.new}
     it 'expect to parse JSON' do
