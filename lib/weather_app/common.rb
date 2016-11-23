@@ -8,7 +8,6 @@ module WeatherApp
       api_key = WEATHER_APP_CONFIG['api_key']
       url = "http://api.openweathermap.org/data/2.5/#{type_forecast}?id=#{city_id}&units=#{units}&APPID=#{api_key}"
       api_response = Net::HTTP.get(URI.parse(url))
-      raise Timeout::Error if Timeout::Error
       JSON.parse(api_response, symbolize_names: true)
       rescue Timeout::Error
         if retries < 3
